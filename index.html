@@ -299,6 +299,20 @@
       border: 1px solid var(--line);
     }
 
+    button.meta-pill {
+      color: inherit;
+      cursor: pointer;
+    }
+
+    button.meta-pill:hover,
+    button.meta-pill:focus-visible,
+    .hero-cta button.is-active {
+      border-color: rgba(229, 9, 20, 0.34);
+      background: rgba(229, 9, 20, 0.14);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
     .hero-poster {
       position: relative;
       align-self: center;
@@ -435,6 +449,81 @@
 
     .card-grid--popular {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .popular-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .movie-detail-panel {
+      position: sticky;
+      top: 92px;
+      padding: 20px;
+      min-height: 410px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        rgba(19, 23, 33, 0.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.26);
+    }
+
+    .movie-detail-panel h3 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+    }
+
+    .movie-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: #d6d9e2;
+      font-size: 0.9rem;
+    }
+
+    .movie-detail-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+    }
+
+    .movie-detail-summary {
+      margin: 0 0 16px;
+      color: #dbe0ec;
+      line-height: 1.8;
+    }
+
+    .movie-detail-points {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .movie-detail-points li {
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      color: #d6d9e2;
+      line-height: 1.5;
+    }
+
+    .movie-detail-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
     }
 
     .card-grid--genres {
@@ -747,6 +836,10 @@
         grid-template-columns: 1fr;
       }
 
+      .popular-layout {
+        grid-template-columns: 1fr;
+      }
+
       .card-grid--popular,
       .card-grid--genres {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -783,6 +876,10 @@
       .card-grid--popular,
       .card-grid--genres {
         grid-template-columns: 1fr;
+      }
+
+      .movie-detail-panel {
+        position: static;
       }
 
       .section-head {
@@ -833,22 +930,22 @@
           <div class="hero-shell">
             <div class="hero-grid">
               <div class="hero-copy">
-                <div class="eyebrow">오늘 밤 바로 볼 영화 찾기</div>
-                <h1>영화 추천 플랫폼의 새로운 메인 페이지</h1>
+                <div class="eyebrow">오늘 밤 볼 영화를 빠르게 고르기</div>
+                <h1>취향에 맞는 영화가 가장 먼저 보이는 곳</h1>
                 <p>
-                  분위기, 장르, 평점, 러닝타임을 한 번에 비교하며 취향에 맞는 영화를 빠르게 고를 수 있습니다.
-                  넷플릭스식 히어로 배너와 카드 중심 UI로 구성해, 첫 화면에서 바로 탐색과 선택이 가능하도록 설계했습니다.
+                  분위기, 장르, 평점, 러닝타임을 한 화면에서 비교해 오늘 볼 작품을 빠르게 고를 수 있습니다.
+                  카드 중심의 어두운 테마로 첫 화면부터 자연스럽게 탐색이 이어지도록 구성했습니다.
                 </p>
 
                 <div class="hero-cta">
-                  <button class="primary-btn" type="button">지금 추천 보기</button>
-                  <button class="ghost-btn" type="button">이번 주 인기작</button>
+                  <button class="primary-btn" type="button" data-scroll-target="#today">지금 추천 보기</button>
+                  <button class="ghost-btn" type="button" data-scroll-target="#popular">이번 주 인기작</button>
                 </div>
 
                 <div class="meta-row" aria-label="서비스 특징">
-                  <div class="meta-pill">4K 썸네일 스타일 카드</div>
-                  <div class="meta-pill">장르별 맞춤 추천</div>
-                  <div class="meta-pill">반응형 레이아웃</div>
+                  <button class="meta-pill" type="button" data-scroll-target="#popular">4K 썸네일 스타일 카드</button>
+                  <button class="meta-pill" type="button" data-scroll-target="#genres">장르별 맞춤 추천</button>
+                  <button class="meta-pill" type="button" data-scroll-target="#footer">반응형 레이아웃</button>
                 </div>
               </div>
 
@@ -892,7 +989,26 @@
             </div>
             <a class="section-link" href="#genres">장르별 추천 보기 →</a>
           </div>
-          <div class="card-grid card-grid--popular" id="popular-grid" aria-live="polite"></div>
+          <div class="popular-layout">
+            <div class="card-grid card-grid--popular" id="popular-grid" aria-live="polite"></div>
+            <aside class="movie-detail-panel" id="movie-detail-panel" aria-live="polite">
+              <div class="movie-detail-tag">선택된 영화</div>
+              <h3 id="movie-detail-title">카드를 선택하면 상세정보가 표시됩니다</h3>
+              <div class="movie-detail-meta" id="movie-detail-meta"></div>
+              <p class="movie-detail-summary" id="movie-detail-summary">
+                왼쪽의 인기 영화 카드를 클릭하면 제목, 장르, 평점, 짧은 설명과 함께 추천 포인트가 이 영역에 표시됩니다.
+              </p>
+              <ul class="movie-detail-points" id="movie-detail-points">
+                <li>카드를 선택해 상세정보를 확인하세요.</li>
+                <li>선택 상태는 카드와 오른쪽 패널에 동시에 반영됩니다.</li>
+                <li>모바일에서는 카드 아래에 상세정보가 이어집니다.</li>
+              </ul>
+              <div class="movie-detail-cta">
+                <button class="primary-btn" type="button" id="movie-detail-action">지금 선택한 영화 보기</button>
+                <button class="ghost-btn" type="button" id="movie-detail-reset">선택 초기화</button>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
 
@@ -983,6 +1099,9 @@
         duration: "118m",
         rating: "4.8",
         desc: "빛과 기억을 둘러싼 추적극. 빠른 몰입감과 세련된 미장센이 돋보이는 작품.",
+        synopsis: "도시 전체가 기억을 잃어가는 상황에서, 한 연구원이 사라진 기록을 되찾기 위해 움직이는 미래형 추적극입니다.",
+        highlight: "강한 네온 색감과 빠른 전개가 매력인 대표작",
+        mood: "긴장감, 몰입감, 미래 도시",
         start: "#ef233c",
         end: "#2b2d42"
       },
@@ -993,6 +1112,9 @@
         duration: "132m",
         rating: "4.7",
         desc: "인물의 감정선을 섬세하게 따라가는 휴먼 드라마. 잔잔하지만 오래 남는 여운을 제공합니다.",
+        synopsis: "서로 멀어진 두 가족이 한 장의 편지를 계기로 다시 연결되는 과정을 따라가는 감성 드라마입니다.",
+        highlight: "대사와 표정이 오래 남는 정서 중심 작품",
+        mood: "감성, 관계, 여운",
         start: "#4a4e69",
         end: "#22223b"
       },
@@ -1003,6 +1125,9 @@
         duration: "124m",
         rating: "4.9",
         desc: "항구 도시의 실종 사건을 따라가는 누아르풍 미스터리. 긴장감 있는 전개가 특징입니다.",
+        synopsis: "안개가 짙은 항구 도시에서 사라진 한 사람의 흔적을 좇는 수사극으로, 마지막까지 결말을 예측하기 어렵게 설계했습니다.",
+        highlight: "어두운 톤과 반전 구조가 강한 몰입을 만듭니다",
+        mood: "미스터리, 추적, 반전",
         start: "#0f4c5c",
         end: "#03045e"
       }
@@ -1082,13 +1207,20 @@
     ];
 
     const popularGrid = document.getElementById("popular-grid");
+    const movieDetailPanel = document.getElementById("movie-detail-panel");
+    const movieDetailTitle = document.getElementById("movie-detail-title");
+    const movieDetailMeta = document.getElementById("movie-detail-meta");
+    const movieDetailSummary = document.getElementById("movie-detail-summary");
+    const movieDetailPoints = document.getElementById("movie-detail-points");
+    const movieDetailAction = document.getElementById("movie-detail-action");
+    const movieDetailReset = document.getElementById("movie-detail-reset");
     const genreToolbar = document.getElementById("genre-toolbar");
     const genreGrid = document.getElementById("genre-grid");
     const todayListEl = document.getElementById("today-list");
 
     const renderPopularMovies = () => {
       popularGrid.innerHTML = popularMovies.map((movie, index) => `
-        <article class="movie-card">
+        <article class="movie-card" role="button" tabindex="0" data-popular-index="${index}" aria-pressed="${index === 0 ? "true" : "false"}">
           <div class="movie-poster" style="--movie-start: ${movie.start}; --movie-end: ${movie.end};">
             <div class="movie-topline">${movie.genre}</div>
             <div class="movie-number">${String(index + 1).padStart(2, "0")}</div>
@@ -1103,6 +1235,36 @@
           </div>
         </article>
       `).join("");
+    };
+
+    const renderPopularDetail = (movie, index) => {
+      movieDetailPanel.style.setProperty("--movie-start", movie.start);
+      movieDetailPanel.style.setProperty("--movie-end", movie.end);
+      movieDetailPanel.style.background = `linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)), linear-gradient(155deg, ${movie.start}, ${movie.end})`;
+      movieDetailTitle.textContent = movie.title;
+      movieDetailMeta.innerHTML = `
+        <span class="movie-detail-tag">${movie.genre}</span>
+        <span class="movie-detail-tag">${movie.year}</span>
+        <span class="movie-detail-tag">러닝타임 ${movie.duration}</span>
+        <span class="movie-detail-tag">평점 ★ ${movie.rating}</span>
+      `;
+      movieDetailSummary.textContent = movie.synopsis;
+      movieDetailPoints.innerHTML = `
+        <li>${movie.desc}</li>
+        <li>${movie.highlight}</li>
+        <li>분위기: ${movie.mood}</li>
+      `;
+      movieDetailAction.textContent = `${movie.title} 선택`;
+      movieDetailAction.dataset.selectedMovie = String(index);
+    };
+
+    const setActivePopularMovie = (index) => {
+      document.querySelectorAll("[data-popular-index]").forEach((card) => {
+        const active = Number(card.dataset.popularIndex) === index;
+        card.setAttribute("aria-pressed", String(active));
+        card.classList.toggle("is-selected", active);
+      });
+      renderPopularDetail(popularMovies[index], index);
     };
 
     const renderGenres = () => {
@@ -1154,15 +1316,62 @@
       });
     };
 
+    const setActiveHeroControl = (target) => {
+      document.querySelectorAll("[data-scroll-target]").forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.scrollTarget === target);
+      });
+    };
+
+    const scrollToTarget = (target) => {
+      const el = document.querySelector(target);
+      if (!el) return;
+      setActiveHeroControl(target);
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
     genreToolbar.addEventListener("click", (event) => {
       const button = event.target.closest(".genre-pill");
       if (!button) return;
       updateGenreSelection(button.dataset.genre);
     });
 
+    popularGrid.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-popular-index]");
+      if (!card) return;
+      setActivePopularMovie(Number(card.dataset.popularIndex));
+    });
+
+    popularGrid.addEventListener("keydown", (event) => {
+      const card = event.target.closest("[data-popular-index]");
+      if (!card) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        setActivePopularMovie(Number(card.dataset.popularIndex));
+      }
+    });
+
+    movieDetailReset.addEventListener("click", () => {
+      setActivePopularMovie(0);
+      document.querySelector('[data-popular-index="0"]').focus();
+    });
+
+    movieDetailAction.addEventListener("click", () => {
+      const index = Number(movieDetailAction.dataset.selectedMovie || 0);
+      setActivePopularMovie(index);
+    });
+
+    document.querySelectorAll("[data-scroll-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        scrollToTarget(button.dataset.scrollTarget);
+      });
+    });
+
+    setActiveHeroControl("#today");
+
     renderPopularMovies();
     renderGenres();
     renderToday();
+    setActivePopularMovie(0);
   </script>
 </body>
 </html>
