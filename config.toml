@@ -1,0 +1,24 @@
+approval_policy = "on-request"
+default_permissions = "lecture-demo"
+
+# Windows에서 Codex의 로컬 작업 격리 환경을 관리자 권한 기반 방식으로 세팅하라는 설정이다.
+# 보통 Windows 네이티브 환경에서는 elevated가 권장된다.
+[windows]
+sandbox = "elevated"
+
+[features]
+codex_git_commit = true
+
+[permissions.lecture-demo.workspace_roots]
+'C:\Users\computer\Desktop\harness_codex\test_260609' = true
+
+[permissions.lecture-demo.filesystem]
+":minimal" = "read"
+
+[permissions.lecture-demo.filesystem.":workspace_roots"]
+"." = "write"
+".git/**" = "write"
+"text/protect.txt" = "deny"
+
+[permissions.lecture-demo.network]
+enabled = false

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Single HTML Page Builder"
+  short_description: "Build a single index.html page from general requirements"
+  default_prompt: "Use this skill to turn a user request into a single browser-ready index.html page with HTML, CSS, and optional JS, asking three clarifying questions when the core requirements are ambiguous."

@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \".codex\\hooks\\post-html-validation.ps1\"",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -File \".codex\\hooks\\post-html-validation.ps1\"",
+            "statusMessage": "Validating HTML after apply_patch"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \".codex\\hooks\\stop-test-and-commit.ps1\"",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -File \".codex\\hooks\\stop-test-and-commit.ps1\"",
+            "statusMessage": "Running final test and auto commit",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  }
+}
